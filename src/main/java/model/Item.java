@@ -5,13 +5,13 @@ import org.bson.types.ObjectId;
 
 import java.util.List;
 
-@MongoEntity(collection = "Catalog")
+@MongoEntity
 public class Item {
     private ObjectId id;
     private double price;
     private String description;
     private String category;
-    private List<Stock> stocks;
+    private List<Stock> stockList;
 
     public ObjectId getId() {
         return id;
@@ -45,11 +45,11 @@ public class Item {
         this.category = category;
     }
 
-    public List<Stock> getStocks() {
-        return stocks;
+    public List<Stock> getStockList() {
+        return stockList;
     }
 
-    public void setStocks(List<Stock> stocks) {
-        this.stocks = stocks;
+    public void setStockList(List<Stock> stockList) {
+        this.stockList = stockList;
     }
 }
