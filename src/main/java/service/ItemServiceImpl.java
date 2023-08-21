@@ -31,16 +31,29 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item create(Item item) {
-        return null;
+        itemRepository.persist(item);
+        return item;
     }
 
     @Override
     public Item update(ObjectId id, Item item) {
-        return null;
+        Item itemFound = itemRepository.findById(id);
+        if(itemFound == null) {
+            throw new WebApplicationException("Item not found", 404);
+        }
+        itemFound.setPrice(item.getPrice());
+        itemFound.setDescription(item.getDescription());
+        itemFound.setCategory(item.getCategory());
+
+        return item;
     }
 
     @Override
     public void delete(ObjectId id) {
-
+        Item item = itemRepository.findById(id);
+        if(item == null) {
+            throw new WebApplicationException("Item not found", 404);
+        }
+        itemRepository.delete(item);
     }
 }
