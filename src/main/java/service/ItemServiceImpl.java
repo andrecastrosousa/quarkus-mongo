@@ -1,5 +1,6 @@
 package service;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.WebApplicationException;
@@ -8,12 +9,22 @@ import org.bson.types.ObjectId;
 import repository.ItemRepository;
 
 import java.util.List;
+import org.jboss.logging.Logger;
 
 @ApplicationScoped
 public class ItemServiceImpl implements ItemService {
 
     @Inject
     ItemRepository itemRepository;
+
+    private static final Logger LOGGER = Logger.getLogger(ItemServiceImpl.class);
+
+    @PostConstruct
+    void init() {
+        String databaseName = itemRepository.mongoDatabase().getName();
+        String collectionName = itemRepository.mongoCollection().getNamespace().getCollectionName();
+        LOGGER.infov("Using ItemRepository[database={0}, collection={1}]", databaseName, collectionName);
+    }
 
     @Override
     public List<Item> getAll() {

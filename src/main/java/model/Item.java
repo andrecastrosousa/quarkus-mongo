@@ -5,7 +5,7 @@ import org.bson.types.ObjectId;
 
 import java.util.List;
 
-@MongoEntity(collection = "Item")
+@MongoEntity(collection = "Catalog")
 public class Item {
     private ObjectId id;
     private double price;

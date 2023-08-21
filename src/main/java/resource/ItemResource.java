@@ -1,13 +1,16 @@
 package resource;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import model.Item;
 import org.bson.types.ObjectId;
+import repository.ItemRepository;
 import service.ItemService;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Path("/items")
 public class ItemResource {
